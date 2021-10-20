@@ -8,6 +8,14 @@ ENV APACHE_LOG_DIR /var/log/apache2
 ENV APACHE_LOCK_DIR /var/run/apache
 ENV APACHE_PID_FILE /var/run/apache/httpd.pid
 RUN mkdir /var/run/apache
+RUN mkdir /data
+ENV xvol=/data
+WORKDIR $xvol
+RUN cat "text" > foo.txt
+RUN cat "text" > bar.txt
+RUN cat "text" > baz.txt
+WORKDIR $HOME
+VOLUME $xvol
 ADD index.html /var/www/html/index.html
 EXPOSE 80
 ENTRYPOINT ["/usr/sbin/apache2"]
