@@ -11,9 +11,9 @@ RUN mkdir /var/run/apache
 RUN mkdir /data
 ENV xvol=/data
 WORKDIR $xvol
-RUN cat "text" > foo.txt
-RUN cat "text" > bar.txt
-RUN cat "text" > baz.txt
+RUN ["/bin/bash", "-c", "cat 'text' > foo.txt"]
+RUN ["/bin/bash", "-c", "cat 'text' > bar.txt"]
+RUN ["/bin/bash", "-c", "cat 'text' > baz.txt"]
 WORKDIR $HOME
 VOLUME $xvol
 ADD index.html /var/www/html/index.html
