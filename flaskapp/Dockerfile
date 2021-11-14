@@ -1,12 +1,16 @@
-FROM ubuntu:18.04
-LABEL updated_on="2021-10-27 09:00"
-RUN apt-get update
-RUN apt-get -y upgrade
-RUN apt-get -y install python3 python3-setuptools python3-pip gunicorn3
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
-COPY lab-4-app /flaskapp
-WORKDIR /flaskapp
-RUN pip3 install -r requirements.txt
-EXPOSE 5000
-ENTRYPOINT "./startup.sh"
+FROM ubuntu:16.04
+LABEL maintainer="Anthony legg/leggtc1@student.op.ac.nz"
+RUN apt-get -q update && apt-get -yq dist-upgrade 
+RUN apt-get -yq install apache2
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_LOG_DIR /var/log/apache2
+ENV APACHE_LOCK_DIR /var/run/apache
+ENV APACHE_PID_FILE /var/run/apache/httpd.pid
+RUN mkdir /var/run/apache
+ADD index.html /var/www/html/index.html
+RUN mkdir /data
+EXPOSE 80
+ENTRYPOINT ["/usr/sbin/apache2"]
+CMD ["-DFOREGROUND"]
 
