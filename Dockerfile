@@ -13,7 +13,7 @@ RUN mkdir /data
 ENV xvol=/data
 WORKDIR $xvol
 RUN ["/bin/bash", "-c", "cat > foo.txt"]
-RUN /bin/bash -c 'echo foo.txt created.'
+RUN /bin/bash -c 'echo foo.txt created now.'
 RUN ["/bin/bash", "-c", "cat > baz.txt"]
 RUN /bin/bash -c 'echo baz.txt created.'
 RUN ["/bin/bash", "-c", "cat > bar.txt"]
