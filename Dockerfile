@@ -10,16 +10,6 @@ ENV APACHE_PID_FILE /var/run/apache/httpd.pid
 RUN mkdir /var/run/apache
 ADD index.html /var/www/html/index.html
 RUN mkdir /data
-ENV xvol=/data
-WORKDIR $xvol
-RUN ["/bin/bash", "-c", "cat > foo.txt"]
-RUN /bin/bash -c 'echo foo.txt created now.'
-RUN ["/bin/bash", "-c", "cat > baz.txt"]
-RUN /bin/bash -c 'echo baz.txt created Now.'
-RUN ["/bin/bash", "-c", "cat > bar.txt"]
-RUN /bin/bash -c 'echo bar.txt created Now!.'
-WORKDIR /
-VOLUME $xvol
 EXPOSE 80
 ENTRYPOINT ["/usr/sbin/apache2"]
 CMD ["-DFOREGROUND"]
